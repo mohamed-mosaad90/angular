@@ -1,0 +1,88 @@
+<section>
+    <div class="container">
+        <div class="row ">
+
+            @for(data of dataList ;track $index){
+            <div [class.bg-danger]="data.price<150" class="card  col-md-4 g-3">
+                <div>
+                    <img [src]="data.imageCover" class=" w-100" alt="">
+                </div>
+                <h4> {{data.title}} </h4>
+                <p> {{data.quantity}} </p>
+                <p> {{data.price}} </p>
+                <p> {{data.description.split(" ",2).join(" ")}} </p>
+                <!-- <div class="row">
+                    @for(item of data.images ;track $index){
+                    <div class="col-md-3">
+                        <img [src]="item" class="w-100" alt="">
+                    </div>
+
+                    }
+                </div> -->
+                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info w-75 mx-auto my-1"
+                    (click)="detailsDtata=data">
+                    show
+                    Details</button>
+            </div>
+            }
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Product Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img [src]="detailsDtata.imageCover" class="w-100" alt="">
+                    <h3>title: {{detailsDtata.title}}</h3>
+                    <p>desc: {{detailsDtata.description}} </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ///////////////////////////////////////////////////////////////////////////////// -->
+    <h2 class="text-center my-5">lazy lading</h2>
+    @defer (on interaction(allam)) {
+
+
+    <div class="container">
+        <div class="row">
+
+            @for(data of dataList ;track $index){
+
+
+
+            <div class="card  col-md-4">
+                <div>
+                    <img [src]="data.imageCover" class="w-100" alt="">
+                </div>
+                <h4> {{data.title}} </h4>
+                <p> {{data.quantity}} </p>
+                <p> {{data.price}} </p>
+                <p> {{data.description}} </p>
+                <div class="row">
+                    @for(item of data.images ;track $index){
+                    <div class="col-md-3">
+                        <img [src]="item" class="w-100" alt="">
+                    </div>
+
+                    }
+                </div>
+            </div>
+
+            }
+        </div>
+    </div>
+    }@placeholder {
+    <button #allam> lazy lading</button>
+    }
+</section>
